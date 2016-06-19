@@ -13,14 +13,14 @@ tags = soup('a')
 count = 0
 tags_list = list()
 while True:
+    if count == int(count_limit):
+        break
     for tag in tags:
-        html = urllib.urlopen(url).read()
-        soup = BeautifulSoup(html)
-        tags = soup('a')
         tags_list.append(str(tag.get('href', None)))
     url = tags_list[int(position) - 1]
+    html = urllib.urlopen(url).read()
+    soup = BeautifulSoup(html)
+    tags = soup('a')
     tags_list = list()
     count += 1
-    if count == count_limit:
-        break
     print url
